@@ -1,0 +1,256 @@
+@import "yeticss"
+@import url(https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900);
+
+body {
+  font-family: "Lato", Helvetica Neue, Helvetica, sans-serif;
+  fieldset {
+    border-color: white;
+    padding: 0px 20px;
+  }
+
+  legend {
+    color: white;
+    text-align: left;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  form {
+    padding: 0 20px;
+    margin: 0;
+  }
+  .form-input {
+    background: transparent;
+    box-shadow: 0 none;
+    border: 0 none;
+    border-bottom: 2px solid transparent;
+    color: white;
+    border-radius: 0;
+    font-size: 42px;
+
+    &:focus,
+    &:active {
+      box-shadow: none;
+      border: 0 none;
+      border-bottom: 2px solid white;
+    }
+  }
+}
+
+
+.weather-container {
+  transition: background .4s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+
+  .blockquote {
+    background: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    margin: 0;
+  }
+}
+
+$font-size = 132px;
+$small-font-size = 24;
+
+.weather-item {
+  height: 100%;
+  text-align: center;
+  color: white;
+  position: relative;
+
+  .location {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1em;
+    margin: 32px 0 .5em 0;
+
+    .city {}
+    .country {}
+  }
+
+  .timestamp {
+    font-weight: 100;
+    font-size: 32px;
+    margin-bottom: 2em;
+    line-height: 1em;
+  }
+
+  &:not(.small) {
+    canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: .2;
+      width: 500px;
+    }
+  }
+
+  .temperature {
+    font-weight: 100;
+    font-size: $font-size;
+    line-height: 1em;
+    margin: 0;
+  }
+
+  &:not(.small) {
+    .temperature-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .info {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  &.small {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-wrap: wrap;
+    aling-items: flex-start;
+    justify-content: flex-start;
+
+    .info,
+    .location {
+      display: none;
+    }
+
+    .timestamp {
+      order: 1;
+      display: flex;
+      flex: 1;
+      align-self: center;
+      margin-top: 32px;
+      font-size: 32px;
+    }
+
+    .temperature-info {
+      display: flex;
+      flex: 2;
+      align-self: center;
+      order: 3;
+    }
+
+    .temperature {
+      font-size: 32px;
+    }
+
+    canvas {
+      width: 100%;
+      margin-bottom: 10px;
+      order: 2;
+      align-self: center;
+    }
+  }
+}
+
+
+.week-container {
+  height: 75vh;
+  overflow: hidden;
+  margin: 0;
+
+  .week-current-day {
+    height: 100%;
+    float: left;
+    width: 30%;
+    overflow: hidden;
+  }
+  .week-all-days {
+    overflow: hidden;
+    width: 70%;
+    float: left;
+    height: 100%;
+
+    .week-one-day {
+      transition: background .4s ease-in-out;
+      display: flex;
+      flex-direction: row;
+
+      float: left;
+      width: calc(100% / 7);
+      height: 100%;
+    }
+  }
+}
+
+for num in ( 1..7 )
+ .week-one-day:nth-child({num})
+    background rgba(0,0,0,(num / 10))
+
+@media screen and (max-width: 1000px) {
+  .week-container {
+
+    .week-current-day {
+      height: 60%;
+      float: none;
+      width: 100%;
+
+      .weather-item {
+        .location {
+          margin-top: 20px;
+        }
+        .temperature-info {
+          top: auto;
+          bottom: 0;
+          transform: translate(-50%, -10%);
+        }
+        &:not(.small) {
+          canvas {
+            top: auto;
+            bottom: 0;
+            transform: translate(-50%, -10%);
+          }
+        }
+      }
+    }
+    .week-all-days {
+      width: 100%;
+      float: none;
+      height: 40%;
+
+      .weather-item {
+        &.small {
+          .timestamp {
+            font-size: 24px;
+            margin-top: .5em;
+            margin-bottom: 1em;
+          }
+          .temperature {
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .week-container {
+    .week-all-days {
+      .weather-item {
+        &.small {
+          .temperature {
+            font-size: 22px;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+}
